@@ -43,14 +43,63 @@
           <span class="navbar-toggler-icon"></span>
         </button>
       </nav>
-      <div class="card text-center">
-        <div class="card-header">
+      <div class="card  justify-content-center">
+        <div class="card-header justify-content-center">
         </div>
-        <div class="card-body">
-          <h5 class="card-title"></h5>
-          <p class="card-text">put something here</p>
+        <div class="card-body justify-content-center">
+          <h5 class="card-title justify-content-center "></h5>
+          <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header">terminal</div>
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p style="color: rgb(64, 255, 0);" ><p style="color:rgb(255, 0, 0);">root#</p>apprentissage <span class="typed-text"></span><span class="cursor">&nbsp;</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="text-center"><i class="fa fa-copyright text-center">ID101-2022/2023-dakhla 	&#169;</i></div>
+    <div class="text-center"><i class="fa fa-copyright text-center">ID101-2022/2023-dakhla 	&#169;</i></div>
 </body>
 </html>
+<script>
+  const typedTextSpan = document.querySelector(".typed-text");
+const cursorSpan = document.querySelector(".cursor");
+
+const textArray = ["difficile", "fun", "amusement", "UNE VIE"];
+const typingDelay = 200;
+const erasingDelay = 100;
+const newTextDelay = 2000; // Delay between current and next text
+let textArrayIndex = 0;
+let charIndex = 0;
+
+function type() {
+  if (charIndex < textArray[textArrayIndex].length) {
+    if(!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+    typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+    charIndex++;
+    setTimeout(type, typingDelay);
+  } 
+  else {
+    cursorSpan.classList.remove("typing");
+  	setTimeout(erase, newTextDelay);
+  }
+}
+
+function erase() {
+	if (charIndex > 0) {
+    if(!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+    typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex-1);
+    charIndex--;
+    setTimeout(erase, erasingDelay);
+  } 
+  else {
+    cursorSpan.classList.remove("typing");
+    textArrayIndex++;
+    if(textArrayIndex>=textArray.length) textArrayIndex=0;
+    setTimeout(type, typingDelay + 1100);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+  if(textArray.length) setTimeout(type, newTextDelay + 250);
+});
+</script>
